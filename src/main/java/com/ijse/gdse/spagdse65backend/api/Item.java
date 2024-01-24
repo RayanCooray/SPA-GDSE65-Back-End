@@ -11,6 +11,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,8 +33,10 @@ import java.util.List;
         ,loadOnStartup = 5
 )
 public class Item extends HttpServlet {
-    Connection connection;
 
+    final static Logger LOGGER = LoggerFactory.getLogger(Item.class);
+
+    Connection connection;
 
 
     @Override
@@ -48,6 +53,7 @@ public class Item extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        LOGGER.info("Init the item service");
     }
 
     @Override

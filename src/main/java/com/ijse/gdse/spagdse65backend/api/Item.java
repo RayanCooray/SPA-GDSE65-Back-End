@@ -67,6 +67,7 @@ public class Item extends HttpServlet {
             boolean issaved = dbProcess.saveitem(itemList, connection);
             PrintWriter writer = resp.getWriter();
             resp.setContentType("text/html");
+            resp.getWriter().write("Item Saved Successfully");
         }
 
     }
@@ -82,12 +83,12 @@ public class Item extends HttpServlet {
             }
             else if (action.equals("getItem")){
                 String item_code_Value = req.getParameter("item_code_Value");
-                getCustomer(req, resp, item_code_Value);
+                getItem(req, resp, item_code_Value);
             }
         }
     }
 
-    private void getCustomer(HttpServletRequest req, HttpServletResponse resp, String itemCodeValue) {
+    private void getItem(HttpServletRequest req, HttpServletResponse resp, String itemCodeValue) {
         var dbProcess = new DBProcess();
         ItemDto itemDto = dbProcess.getItem(itemCodeValue, connection);
         Jsonb jsonb = JsonbBuilder.create();
@@ -157,7 +158,7 @@ public class Item extends HttpServlet {
 
             if (result){
                 resp.setStatus(HttpServletResponse.SC_OK);
-                resp.getWriter().write("Customer information updated successfully.");
+                resp.getWriter().write("Item information updated successfully.");
             }else {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Failed to update customer information.");
             }

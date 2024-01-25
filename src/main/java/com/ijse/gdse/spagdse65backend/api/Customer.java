@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 
-@WebServlet(name = "Customer",urlPatterns = "/customer",
+@WebServlet(name = "customer",urlPatterns = "/customer",
         initParams = {
                 @WebInitParam(name = "db-user",value = "root"),
                 @WebInitParam(name = "db-pw",value = "1234"),
@@ -29,14 +29,14 @@ import java.util.ArrayList;
 public class Customer extends HttpServlet {
     Connection connection;
 
-
-
     @Override
     public void init() throws ServletException {
+
+        System.out.println("Hello Customer");
+
         String userName = getServletConfig().getInitParameter("db-user");
         String password = getServletConfig().getInitParameter("db-pw");
         String url = getServletConfig().getInitParameter("db-url");
-
 
 
         try {
@@ -68,10 +68,12 @@ public class Customer extends HttpServlet {
             if (action.equals("generateCustomerId")) {
                 generateCustomerId(req, resp);
             }else if (action.equals(("getAllCustomer"))){
+                resp.getWriter().write("Student information fetched successfully.");
                 getAllCustomer(req,resp);
             }else if (action.equals("getCustomer")){
                 String customerId = req.getParameter("customerId");
                 getCustomer(req, resp, customerId);
+                resp.getWriter().write(customerId+"Student information got successfully.");
             }
         }
     }
@@ -100,6 +102,7 @@ public class Customer extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var customerId = req.getParameter("customerIdValue");
+        System.out.println("customerIdValue"+customerId);
         var dbProcess = new DBProcess();
         boolean result = dbProcess.deleteCustomer(connection, customerId);
         if (result) {

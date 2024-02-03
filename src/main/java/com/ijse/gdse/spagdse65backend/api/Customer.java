@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 
-@WebServlet(name = "customer",urlPatterns = "/customer",
+@WebServlet(name = "Customer",urlPatterns = "/customer",
         initParams = {
                 @WebInitParam(name = "db-user",value = "root"),
                 @WebInitParam(name = "db-pw",value = "1234"),
@@ -68,15 +68,18 @@ public class Customer extends HttpServlet {
             if (action.equals("generateCustomerId")) {
                 generateCustomerId(req, resp);
             }else if (action.equals(("getAllCustomer"))){
-                resp.getWriter().write("Student information fetched successfully.");
+//                resp.getWriter().write("Customer information fetched successfully.");
                 getAllCustomer(req,resp);
             }else if (action.equals("getCustomer")){
                 String customerId = req.getParameter("customerId");
                 getCustomer(req, resp, customerId);
-                resp.getWriter().write(customerId+"Student information got successfully.");
+                resp.getWriter().write(customerId+"Customer information got successfully.");
             }
         }
     }
+
+
+
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -107,7 +110,7 @@ public class Customer extends HttpServlet {
         boolean result = dbProcess.deleteCustomer(connection, customerId);
         if (result) {
             resp.setStatus(HttpServletResponse.SC_OK);
-            resp.getWriter().write("Student information delete successfully.");
+            resp.getWriter().write("Customer information delete successfully.");
         } else {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete student information.");
 
@@ -158,6 +161,5 @@ public class Customer extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             throw new RuntimeException(e);
         }
-
     }
 }

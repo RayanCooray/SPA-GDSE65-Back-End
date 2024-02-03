@@ -116,10 +116,10 @@ public class PlaceOder extends HttpServlet {
 
     private void generateOderId(HttpServletRequest req, HttpServletResponse resp) {
         var oderDb = new DBProcess();
-        String getLastCustomerId = oderDb.generateOderID(connection);
+        String getoderid = oderDb.generateOderID(connection);
 
         Jsonb jsonb = JsonbBuilder.create();
-        String json = jsonb.toJson(getLastCustomerId);
+        String json = jsonb.toJson(getoderid);
         resp.setContentType("application/json");
         try {
             resp.getWriter().write(json);

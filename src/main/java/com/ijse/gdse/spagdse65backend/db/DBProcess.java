@@ -278,13 +278,8 @@ public class DBProcess {
 
 
 
-
-
-
-
-
-    /////////👇📦📦📦📦📦📦📦📦📦📦ORDERS📦📦📦📦📦📦📦📦📦📦👇///////
-    //generate oder id
+    ///////👇📦📦📦📦📦📦📦📦📦📦ORDERS📦📦📦📦📦📦📦📦📦📦👇///////
+//    generate oder id
     public String generateOderID(Connection connection) {
         String get_oder_item_id = "SELECT MAX(Oder_ID) as last_oder_id FROM oder;";
 
@@ -556,7 +551,7 @@ public class DBProcess {
                 OrderDTO orderDTO = new OrderDTO();
                 orderDTO.setOrder_date(String.valueOf(resultSet.getDate("order_date")));
                 orderDTO.setOrder_id(resultSet.getString("order_id"));
-                orderDTO.setCustomer_id(resultSet.getString("customer_id"));
+                orderDTO.setCustomer_id(resultSet.getString("usctomer_id"));
                 orderDTO.setTotal(resultSet.getDouble("total"));
                 orderDTO.setDiscount(resultSet.getDouble("discount"));
                 orderDTO.setCash(resultSet.getDouble("cash"));
